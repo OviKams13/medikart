@@ -1,0 +1,49 @@
+# Dependencies
+node_modules/
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+
+# Builds and logs
+dist/
+build/
+coverage/
+*.log
+
+# Backend (Maven)
+backend/target/
+
+# Android
+apps/mobile/android/.gradle/
+apps/mobile/android/build/
+apps/mobile/android/app/build/
+apps/mobile/android/local.properties
+*.apk
+*.aab
+
+# iOS (V2)
+apps/mobile/ios/Pods/
+apps/mobile/ios/build/
+
+# Secrets and environment files (D1.8-15)
+.env
+.env.*
+!.env.example
+*firebase-adminsdk*.json
+google-services*.json
+GoogleService-Info*.plist
+*.keystore
+*.jks
+!apps/mobile/android/app/debug.keystore
+
+# IDE and OS
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.DS_Store
+Thumbs.db
