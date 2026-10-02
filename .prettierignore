@@ -1,0 +1,8 @@
+yarn.lock
+.yarn/
+backend/
+**/android/
+**/ios/
+build/
+dist/
+coverage/
