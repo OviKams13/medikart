@@ -1,0 +1,36 @@
+export default {
+  extends: ['@commitlint/config-conventional'],
+  rules: {
+    'type-enum': [
+      2,
+      'always',
+      ['feat', 'fix', 'refactor', 'test', 'docs', 'chore', 'build', 'ci', 'perf', 'style'],
+    ],
+    'scope-enum': [
+      2,
+      'always',
+      [
+        'auth',
+        'catalog',
+        'slots',
+        'booking',
+        'appointments',
+        'notifications',
+        'doctor',
+        'admin',
+        'call',
+        'profile',
+        'jobs',
+        'i18n',
+        'datetime',
+        'db',
+        'infra',
+        'deps',
+        'ci',
+      ],
+    ],
+    'scope-empty': [2, 'never'],
+    'header-max-length': [2, 'always', 72],
+    'subject-full-stop': [2, 'never', '.'],
+  },
+};
