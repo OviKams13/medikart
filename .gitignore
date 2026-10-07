@@ -47,3 +47,11 @@ GoogleService-Info*.plist
 !.vscode/settings.json
 .DS_Store
 Thumbs.db
+
+# Local working files for Claude Code (never committed)
+/a.explanations/
+/a.features/
+/a.photo/
+/a.ERD_Medikart_EN.md
+/a.Medikart_Execution_Context_EN.md
+/a.Medikart_Feasibility_Report_EN.md
