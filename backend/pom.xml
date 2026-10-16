@@ -20,7 +20,21 @@
     <java.version>21</java.version>
     <spotless.version>3.10.4</spotless.version>
     <palantir-java-format.version>2.102.0</palantir-java-format.version>
+    <flamingock.version>1.4.5</flamingock.version>
   </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- Flamingock Community Edition: versions of all its modules -->
+      <dependency>
+        <groupId>io.flamingock</groupId>
+        <artifactId>flamingock-community-bom</artifactId>
+        <version>${flamingock.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <dependencies>
     <!-- Base stack (report §13). Third-party libraries are added at their own plan point. -->
@@ -47,6 +61,21 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+
+    <!-- Database migrations (plan 4.7): Flamingock, Mongock's successor. MongoDB sync driver
+         modules, because the Spring Data module does not support Spring Data MongoDB 5 yet. -->
+    <dependency>
+      <groupId>io.flamingock</groupId>
+      <artifactId>flamingock-springboot-integration</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.flamingock</groupId>
+      <artifactId>flamingock-mongodb-sync-targetsystem</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.flamingock</groupId>
+      <artifactId>flamingock-mongodb-sync-auditstore</artifactId>
     </dependency>
 
     <!-- Tests -->
@@ -103,6 +132,20 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+      <!-- Flamingock's annotation processor builds the list of migrations at compile time -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>io.flamingock</groupId>
+              <artifactId>flamingock-processor</artifactId>
+              <version>${flamingock.version}</version>
+            </path>
+          </annotationProcessorPaths>
+        </configuration>
       </plugin>
       <!-- Java formatting: ./mvnw spotless:apply to format, spotless:check runs in the verify phase -->
       <plugin>
