@@ -147,6 +147,14 @@
           </annotationProcessorPaths>
         </configuration>
       </plugin>
+      <!-- Tests run in UTC, like the app (MedikartApplication sets it at startup, plan 4.8) -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <argLine>-Duser.timezone=UTC</argLine>
+        </configuration>
+      </plugin>
       <!-- Java formatting: ./mvnw spotless:apply to format, spotless:check runs in the verify phase -->
       <plugin>
         <groupId>com.diffplug.spotless</groupId>
