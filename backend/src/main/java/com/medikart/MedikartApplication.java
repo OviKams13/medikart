@@ -4,8 +4,10 @@ import java.time.ZoneOffset;
 import java.util.TimeZone;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
 @SpringBootApplication
+@ConfigurationPropertiesScan // @ConfigurationProperties records, e.g. common.system.AppConfigProperties
 public class MedikartApplication {
 
     public static void main(String[] args) {
