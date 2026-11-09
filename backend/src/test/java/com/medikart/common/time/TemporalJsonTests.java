@@ -104,7 +104,9 @@ class TemporalJsonTests {
         mockMvc.perform(post("/test/temporal")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json("2026-10-02T12:30:00Z", localDate, "14:30")))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value("MALFORMED_REQUEST")) // error body: plan 4.9
+                .andExpect(jsonPath("$.details[0].field").value("doctorLocalDate"));
     }
 
     @ParameterizedTest
@@ -113,7 +115,9 @@ class TemporalJsonTests {
         mockMvc.perform(post("/test/temporal")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json("2026-10-02T12:30:00Z", "2026-10-02", localTime)))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value("MALFORMED_REQUEST")) // error body: plan 4.9
+                .andExpect(jsonPath("$.details[0].field").value("from"));
     }
 
     @Test
