@@ -1,0 +1,2 @@
+org.springframework.boot.EnvironmentPostProcessor=com.medikart.common.startup.MongoUriEnvironmentPostProcessor
+org.springframework.boot.diagnostics.FailureAnalyzer=com.medikart.common.startup.MissingMongoUriFailureAnalyzer

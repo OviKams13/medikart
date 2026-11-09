@@ -50,9 +50,9 @@ class ServerTimeTests {
         assertThat(Duration.between(now, Instant.now()).abs()).isLessThan(Duration.ofSeconds(1));
     }
 
-    /** Public endpoint (200), protected endpoint (401) and unknown path (401 before routing). */
+    /** Public endpoint (200, /health since plan 4.11), protected endpoint (401) and unknown path (401). */
     @ParameterizedTest
-    @ValueSource(strings = {"/actuator/health", "/api/v1/users/me", "/actuator/does-not-exist"})
+    @ValueSource(strings = {"/api/v1/health", "/api/v1/users/me", "/actuator/does-not-exist"})
     void everyResponseCarriesTheDateHeader(String path) throws Exception {
         Instant before = clock.instant().minusSeconds(1);
 

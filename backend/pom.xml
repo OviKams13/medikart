@@ -21,6 +21,7 @@
     <spotless.version>3.10.4</spotless.version>
     <palantir-java-format.version>2.102.0</palantir-java-format.version>
     <flamingock.version>1.4.5</flamingock.version>
+    <springdoc.version>3.2.0</springdoc.version>
   </properties>
 
   <dependencyManagement>
@@ -76,6 +77,13 @@
     <dependency>
       <groupId>io.flamingock</groupId>
       <artifactId>flamingock-mongodb-sync-auditstore</artifactId>
+    </dependency>
+
+    <!-- API documentation (plan 4.10): OpenAPI 3 spec at /v3/api-docs and Swagger UI. Not managed by Boot. -->
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+      <version>${springdoc.version}</version>
     </dependency>
 
     <!-- Tests -->
