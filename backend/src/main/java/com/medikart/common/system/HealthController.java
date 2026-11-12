@@ -2,6 +2,7 @@ package com.medikart.common.system;
 
 import com.medikart.common.ApiPaths;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import org.springframework.boot.health.actuate.endpoint.HealthEndpoint;
 import org.springframework.boot.health.contributor.Status;
@@ -23,7 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
 class HealthController {
 
     /** Response body of {@code /health}. */
-    record HealthResponse(String status) {}
+    record HealthResponse(
+            @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
+            String status) {}
 
     private final HealthEndpoint healthEndpoint;
 

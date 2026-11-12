@@ -4,7 +4,7 @@ import tseslint from 'typescript-eslint';
 import { datetimeModuleExemption, datetimeRestrictions } from './eslint/index.mjs';
 
 export default tseslint.config(
-  { ignores: ['node_modules/**', 'coverage/**', 'dist/**'] },
+  { ignores: ['src/api/generated/**', 'node_modules/**', 'coverage/**', 'dist/**'] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {

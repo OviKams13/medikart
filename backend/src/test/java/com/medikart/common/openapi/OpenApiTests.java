@@ -62,6 +62,12 @@ class OpenApiTests {
                         .exists())
                 .andExpect(jsonPath("$.components.schemas.ApiError.properties.traceId")
                         .exists())
+                // 4.15: named ErrorCode enum, required fields, typed details
+                .andExpect(jsonPath("$.components.schemas.ErrorCode.enum").isArray())
+                .andExpect(jsonPath("$.components.schemas.ApiError.properties.code.$ref")
+                        .value("#/components/schemas/ErrorCode"))
+                .andExpect(jsonPath("$.components.schemas.ApiError.required").isArray())
+                .andExpect(jsonPath("$.components.schemas.FieldDetail.required").isArray())
                 .andReturn();
 
         // the codes are an enum, so the generated client types (plan 4.15) are a union of codes

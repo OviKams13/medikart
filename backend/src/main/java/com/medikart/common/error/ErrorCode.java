@@ -1,5 +1,7 @@
 package com.medikart.common.error;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 /**
  * Error code catalog (report §10.3): the {@code code} of every error body, with its HTTP status.
  * Clients translate the code; the message is technical and in English.
@@ -8,6 +10,7 @@ package com.medikart.common.error;
  * requests that Spring MVC rejects before any business rule runs (unreadable JSON, a badly
  * formatted date or time, wrong HTTP method).
  */
+@Schema(enumAsRef = true)
 public enum ErrorCode {
     // Authentication and access
     UNAUTHENTICATED(401),
