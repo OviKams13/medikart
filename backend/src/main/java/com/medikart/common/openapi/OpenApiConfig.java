@@ -1,10 +1,13 @@
 package com.medikart.common.openapi;
 
 import com.medikart.common.error.ApiError;
+import com.medikart.common.error.FieldDetail;
 import io.swagger.v3.core.converter.ModelConverters;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.media.ArraySchema;
+import io.swagger.v3.oas.models.media.Schema;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springdoc.core.customizers.OpenApiCustomizer;
@@ -48,8 +51,22 @@ class OpenApiConfig {
     /** Adds {@code ApiError} (and its {@code ErrorCode} enum) to the schemas of the document. */
     @Bean
     OpenApiCustomizer errorSchemas() {
-        return openApi -> ModelConverters.getInstance()
-                .readAll(ApiError.class)
-                .forEach((name, schema) -> openApi.getComponents().addSchemas(name, schema));
+        return openApi -> {
+            for (Class<?> type : new Class<?>[] {ApiError.class, FieldDetail.class}) {
+                ModelConverters.getInstance()
+                        .readAll(type)
+                        .forEach((name, schema) -> openApi.getComponents().addSchemas(name, schema));
+            }
+            // details is a List<Object> in Java (other kinds of item will come with the conflicts);
+            // for the client types it is a list of FieldDetail, the only kind so far
+            Schema<?> details = (Schema<?>) openApi.getComponents()
+                    .getSchemas()
+                    .get("ApiError")
+                    .getProperties()
+                    .get("details");
+            if (details instanceof ArraySchema array) {
+                array.setItems(new Schema<>().$ref("#/components/schemas/FieldDetail"));
+            }
+        };
     }
 }

@@ -6,3 +6,4 @@ backend/
 build/
 dist/
 coverage/
+packages/shared/src/api/generated/
