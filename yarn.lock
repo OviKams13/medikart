@@ -2257,12 +2257,16 @@ __metadata:
     "@react-native/metro-config": "npm:0.88.1"
     "@react-native/typescript-config": "npm:0.88.1"
     "@types/jest": "npm:^29.5.13"
+    "@types/node": "npm:^24"
     "@types/react": "npm:^19.2.0"
     "@types/react-test-renderer": "npm:^19.1.0"
     eslint: "npm:^9.39.5"
+    i18next: "npm:27.1.2"
     jest: "npm:^29.6.3"
     react: "npm:19.3.0"
+    react-i18next: "npm:18.0.1"
     react-native: "npm:0.88.1"
+    react-native-localize: "npm:3.7.2"
     react-native-safe-area-context: "npm:^5.5.2"
     react-test-renderer: "npm:19.3.0"
     typescript: "npm:^6.0.3"
@@ -5879,6 +5883,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"html-parse-stringify@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "html-parse-stringify@npm:4.0.1"
+  checksum: 10c0/8d7267acbc8b70a50096176e28ba491af89fb31613b6a062bce4b8201b2703fd652bedfbe0db6efe90145379c89524a3319b1b58b8c96a72779b0f49e4c2c180
+  languageName: node
+  linkType: hard
+
 "http-errors@npm:^2.0.1, http-errors@npm:~2.0.1":
   version: 2.0.1
   resolution: "http-errors@npm:2.0.1"
@@ -5915,6 +5926,18 @@ __metadata:
   bin:
     husky: bin.js
   checksum: 10c0/35bb110a71086c48906aa7cd3ed4913fb913823715359d65e32e0b964cb1e255593b0ae8014a5005c66a68e6fa66c38dcfa8056dbbdfb8b0187c0ffe7ee3a58f
+  languageName: node
+  linkType: hard
+
+"i18next@npm:27.1.2":
+  version: 27.1.2
+  resolution: "i18next@npm:27.1.2"
+  peerDependencies:
+    typescript: ^5 || ^6 || ^7
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 10c0/0e00683d816db2c6c4c4d6151d8ac9d1f0be79b25c7562689ba9690fcb445319c69a6f411806f27b62c552fe5a2cbd047974e301172bb0e51c1a6ffa590e3586
   languageName: node
   linkType: hard
 
@@ -8397,6 +8420,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-i18next@npm:18.0.1":
+  version: 18.0.1
+  resolution: "react-i18next@npm:18.0.1"
+  dependencies:
+    html-parse-stringify: "npm:^4.0.1"
+  peerDependencies:
+    "@types/react": "*"
+    i18next: ">= 27.0.1"
+    react: ">= 18.0.0"
+    typescript: ^5 || ^6 || ^7
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    typescript:
+      optional: true
+  checksum: 10c0/a372c17158db33d7deec495dfdff127930334cdc264a931ea942289f25ddbd45e9debb69e986e587db4be8e8eff6ea0a50351b73fd6469be65c1cfa0acde4120
+  languageName: node
+  linkType: hard
+
 "react-is@npm:^16.13.1":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
@@ -8415,6 +8457,20 @@ __metadata:
   version: 19.3.1
   resolution: "react-is@npm:19.3.1"
   checksum: 10c0/428e02d986d56f1859c57756084489f6d2900fd686905003c405b32f1168738b78772bfa4bb6c706f5ac821199171522c28bf6434281f524f901459390a19606
+  languageName: node
+  linkType: hard
+
+"react-native-localize@npm:3.7.2":
+  version: 3.7.2
+  resolution: "react-native-localize@npm:3.7.2"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+    react-native-macos: "*"
+  peerDependenciesMeta:
+    react-native-macos:
+      optional: true
+  checksum: 10c0/93c415fdf27096517c791cd24bebf7f6a764e5ab5c6d2f628cfe9be2b3a69e8dfd30f35aae8a36e4631933273eb8c6baec47f1befcafafcceb9f5423762f01c8
   languageName: node
   linkType: hard
 
