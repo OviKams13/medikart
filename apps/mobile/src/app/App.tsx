@@ -1,30 +1,20 @@
-import { formatTime, type ErrorCode } from '@medikart/shared';
-import { StatusBar, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { I18nextProvider } from 'react-i18next';
+import { initI18n } from '../i18n';
+import { DevGallery } from './DevGallery';
 
-// 4.16 proof that Metro resolves @medikart/shared from the monorepo (runtime import of the
-// datetime module, type import of the generated API types). Replaced by the real shell in 4.21.
-const CHECK_INSTANT = '2026-10-02T12:30:00Z';
-const SAMPLE_ERROR: ErrorCode = 'SLOT_TAKEN';
+// Language = the phone's, French as fallback. Initialized before the first render (4.20).
+const i18n = initI18n();
 
+// The real shell (navigation 4.21, Redux and React Query 4.22) replaces the gallery later.
 function App() {
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <View style={styles.container}>
-        <Text style={styles.title}>Medikart</Text>
-        <Text>
-          {CHECK_INSTANT} ={' '}
-          {formatTime(CHECK_INSTANT, { locale: 'en', timeZone: 'Africa/Lubumbashi' })}
-        </Text>
-        <Text>{SAMPLE_ERROR}</Text>
-      </View>
-    </>
+    <I18nextProvider i18n={i18n}>
+      <SafeAreaProvider>
+        <DevGallery />
+      </SafeAreaProvider>
+    </I18nextProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1, alignItems: 'center', justifyContent: 'center' },
-  title: { fontSize: 28, fontWeight: '600' },
-});
 
 export default App;
