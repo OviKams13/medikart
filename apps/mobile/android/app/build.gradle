@@ -82,6 +82,14 @@ android {
     compileSdk rootProject.ext.compileSdkVersion
 
     namespace "com.medikart.patient"
+
+    // 4.18: fonts live in apps/mobile/assets/fonts (single copy) and are packed into the APK assets.
+    sourceSets {
+        main {
+            assets.srcDirs += ["../../assets"]
+        }
+    }
+
     defaultConfig {
         applicationId "com.medikart.patient"
         minSdkVersion rootProject.ext.minSdkVersion
