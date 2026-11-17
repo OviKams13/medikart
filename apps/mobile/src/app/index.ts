@@ -1,5 +1,6 @@
 /**
- * Application shell: navigation, providers (Redux, React Query) and theme.
- * 4.19: `DevGallery` is the temporary root screen (theme + base components).
+ * Application shell: navigation (4.21), providers and state (4.22), services (4.23) and theme.
+ * The root component is `App.tsx`, registered by `index.js`.
  */
-export {};
+export { AppProviders } from './AppProviders';
+export { createAppServices, type AppServices, type AppServicesOptions } from './services';
