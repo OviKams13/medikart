@@ -1,6 +1,7 @@
 import { formatTime } from '@medikart/shared';
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { useApiErrorMessage, useAppConfig, useNow } from '../api';
 import {
   AppText,
   Avatar,
@@ -13,6 +14,7 @@ import {
 } from '../components';
 import { changeLanguage, useErrorMessage, useLocale, useTranslation } from '../i18n';
 import { useTheme, type ColorName } from '../theme';
+import { useAppSelector } from './store';
 
 // 4.16 proof kept on purpose: a runtime import of the datetime module of @medikart/shared.
 const CHECK_INSTANT = '2026-10-02T12:30:00Z';
@@ -27,13 +29,20 @@ const TYPE_SAMPLES = [
 
 /**
  * Development gallery (4.19): shows the theme and every base component so they can be checked
- * on a device. Replaced by the real navigation shell in 4.21; never reachable in production.
+ * on a device. Since 4.21 it is a route of the root stack, registered in development builds only
+ * and opened from the dev menu. Since 4.23 it also shows the `GET /app-config` result and the
+ * measured clock offset.
  */
 export function DevGallery() {
   const theme = useTheme();
   const { t } = useTranslation();
   const locale = useLocale();
   const errorMessage = useErrorMessage();
+  // 4.23: the chain client -> React Query -> screen, and the server clock, on a real call.
+  const appConfig = useAppConfig();
+  const apiErrorMessage = useApiErrorMessage();
+  const now = useNow();
+  const clockOffsetMs = useAppSelector((state) => state.clock.offsetMs);
   const [name, setName] = useState('');
   const [chip, setChip] = useState<'all' | 'one' | 'two'>('all');
 
@@ -166,6 +175,36 @@ export function DevGallery() {
       <AppText>
         {SAMPLE_ERROR_CODE}: {errorMessage(SAMPLE_ERROR_CODE)}
       </AppText>
+
+      {section(t('gallery.sectionApi'))}
+      <AppText variant="label" color="textSecondary">
+        {t('gallery.apiConfigLabel')}
+      </AppText>
+      {appConfig.isPending && <Loader accessibilityLabel={t('common.loading')} />}
+      {appConfig.isError && <AppText color="danger">{apiErrorMessage(appConfig.error)}</AppText>}
+      {appConfig.data && (
+        <AppText>
+          {t('gallery.apiMinimumVersion')}: {appConfig.data.minimumVersion ?? t('gallery.notSet')}
+        </AppText>
+      )}
+      <AppText>
+        {t('gallery.apiClockOffset')}:{' '}
+        {clockOffsetMs === null ? t('gallery.apiClockUnmeasured') : `${clockOffsetMs} ms`}
+      </AppText>
+      <AppText>
+        {t('gallery.apiNow')}: {formatTime(now(), { locale })}
+      </AppText>
+      <View style={{ marginTop: theme.spacing.md }}>
+        <Button
+          title={t('gallery.apiRefresh')}
+          variant="secondary"
+          loading={appConfig.isFetching}
+          loadingAccessibilityLabel={t('common.loading')}
+          onPress={() => {
+            appConfig.refetch();
+          }}
+        />
+      </View>
     </ScreenContainer>
   );
 }

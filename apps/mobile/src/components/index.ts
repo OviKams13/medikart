@@ -10,3 +10,4 @@ export { Chip, type ChipProps } from './Chip';
 export { Loader, type LoaderProps } from './Loader';
 export { ScreenContainer, type ScreenContainerProps } from './ScreenContainer';
 export { TextField, type TextFieldProps } from './TextInput';
+export { PlaceholderScreen, type PlaceholderScreenProps } from './PlaceholderScreen';
