@@ -5,9 +5,9 @@ import { useAppDispatch, useAppSelector } from './hooks';
 import { createAppStore } from './store';
 
 describe('store', () => {
-  test('starts signed out with an unmeasured clock, and holds nothing else', () => {
+  test('starts restoring (the splash) with an unmeasured clock, and holds nothing else', () => {
     const state = createAppStore().getState();
-    expect(state).toEqual({ session: { status: 'signedOut' }, clock: { offsetMs: null } });
+    expect(state).toEqual({ session: { status: 'restoring' }, clock: { offsetMs: null } });
   });
 
   test('session status changes', () => {
@@ -30,7 +30,7 @@ describe('store', () => {
     const a = createAppStore();
     const b = createAppStore();
     a.dispatch(sessionStatusChanged('signedIn'));
-    expect(b.getState().session.status).toBe('signedOut');
+    expect(b.getState().session.status).toBe('restoring');
   });
 });
 
@@ -54,6 +54,6 @@ describe('typed hooks', () => {
     await act(async () => {
       dispatch(sessionStatusChanged('signedIn'));
     });
-    expect(seen).toEqual(['signedOut', 'signedIn']);
+    expect(seen).toEqual(['restoring', 'signedIn']);
   });
 });

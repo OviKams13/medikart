@@ -5,3 +5,8 @@ jest.mock(
 );
 // The phone language is chosen by each test through this mock.
 jest.mock('react-native-localize', () => ({ findBestLanguageTag: jest.fn(() => undefined) }));
+// The native splash (4.24): nothing to hide in jest.
+jest.mock('react-native-bootsplash', () => ({
+  __esModule: true,
+  default: { hide: jest.fn(() => Promise.resolve()), isVisible: jest.fn(() => false) },
+}));

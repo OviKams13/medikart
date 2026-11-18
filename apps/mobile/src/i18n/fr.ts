@@ -1,3 +1,4 @@
+import { errorMessagesFr } from '@medikart/shared';
 import type { Translation } from './en';
 
 /** French texts (default language). Same keys as `en.ts`, checked by the type. */
@@ -14,41 +15,7 @@ export const fr: Translation = {
     unknown: 'Une erreur est survenue. Veuillez réessayer.',
     network: 'Pas de connexion. Vérifiez votre réseau et réessayez.',
   },
-  errors: {
-    UNAUTHENTICATED: 'Votre session a expiré. Veuillez vous reconnecter.',
-    FORBIDDEN: "Vous n'êtes pas autorisé à faire cela.",
-    FORBIDDEN_FIELD: "Vous n'êtes pas autorisé à modifier cette information.",
-    DOCTOR_ACCOUNT: "Un compte médecin ne peut pas être supprimé depuis l'application.",
-    NOT_FOUND: "Cet élément n'existe plus ou n'est pas disponible.",
-    VALIDATION_ERROR: 'Certaines informations sont invalides. Vérifiez le formulaire.',
-    QUERY_TOO_SHORT: 'Saisissez quelques lettres de plus pour lancer la recherche.',
-    RANGE_TOO_LARGE: 'La période sélectionnée est trop longue.',
-    SLOT_TAKEN: "Ce créneau vient d'être pris. Veuillez en choisir un autre.",
-    OUT_OF_WINDOW: 'Cette date est en dehors de la période de réservation.',
-    SLOT_NOT_IN_SCHEDULE: 'Cet horaire est en dehors des horaires du médecin.',
-    LIMIT_REACHED: 'Vous avez atteint le nombre maximum de rendez-vous à venir.',
-    ONE_PER_DAY: 'Vous avez déjà un rendez-vous ce jour-là.',
-    DOCTOR_NOT_AVAILABLE: "Ce médecin n'est pas disponible à la réservation.",
-    CANCEL_TOO_LATE: 'Il est trop tard pour annuler ce rendez-vous.',
-    INVALID_TRANSITION: "Ce changement n'est pas possible pour ce rendez-vous.",
-    NOT_COMPLETED: 'Vous pouvez noter un médecin une fois le rendez-vous terminé.',
-    ALREADY_REVIEWED: 'Vous avez déjà noté ce rendez-vous.',
-    SCHEDULE_CONFLICT: 'Ce changement concerne des rendez-vous existants.',
-    EXCEPTION_CONFLICT: 'Cette absence concerne des rendez-vous existants.',
-    SLOT_DURATION_LOCKED: 'La durée des créneaux ne peut pas être modifiée pour le moment.',
-    OVERLAPPING_RANGES: 'Les plages horaires ne doivent pas se chevaucher.',
-    CROSSES_MIDNIGHT: 'Une plage horaire ne peut pas dépasser minuit.',
-    HAS_UPCOMING_APPOINTMENTS: 'Impossible tant que des rendez-vous à venir existent.',
-    EMAIL_EXISTS: 'Un compte utilise déjà cette adresse e-mail.',
-    ALREADY_ACTIVATED: 'Ce compte est déjà activé.',
-    FILE_TOO_LARGE: 'Ce fichier est trop volumineux.',
-    UNSUPPORTED_FORMAT: "Ce format de fichier n'est pas pris en charge.",
-    RATE_LIMITED: 'Trop de tentatives. Patientez un instant puis réessayez.',
-    APP_VERSION_UNSUPPORTED: "Veuillez mettre à jour l'application pour continuer.",
-    INTERNAL_ERROR: 'Une erreur est survenue de notre côté. Veuillez réessayer plus tard.',
-    MALFORMED_REQUEST: "La demande n'a pas pu être comprise. Veuillez réessayer.",
-    METHOD_NOT_ALLOWED: "Cette action n'est pas disponible.",
-  },
+  errors: errorMessagesFr,
   screens: {
     splash: 'Démarrage',
     onboarding: 'Bienvenue',
@@ -67,6 +34,19 @@ export const fr: Translation = {
     appointmentDetail: 'Détail du rendez-vous',
     voiceCall: 'Appel vocal',
     notifications: 'Notifications',
+    update: 'Mise à jour requise',
+  },
+  update: {
+    title: 'Mettez Medikart à jour',
+    message:
+      "Cette version de l'application n'est plus prise en charge. Mettez-la à jour pour continuer à prendre rendez-vous.",
+    messageNoLink:
+      "Cette version de l'application n'est plus prise en charge. La mise à jour n'est pas encore disponible : réessayez plus tard.",
+    store: "Mettre à jour l'application",
+    checkAgain: 'Vérifier à nouveau',
+    installed: 'Version installée',
+    required: 'Version requise',
+    support: "Besoin d'aide ? Écrivez à {{email}}",
   },
   dev: {
     menu: 'Dev',

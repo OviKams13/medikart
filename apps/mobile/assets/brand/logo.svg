@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <!-- TEMPORARY Medikart mark (4.24): white rounded square with a blue cross, from the theme colors
+       (onPrimary #FFFFFF, primary #0B3AA6). Replace this file with the real logo, then run
+       `yarn generate:splash` in apps/mobile. -->
+  <rect width="200" height="200" rx="44" fill="#FFFFFF"/>
+  <rect x="80" y="40" width="40" height="120" rx="8" fill="#0B3AA6"/>
+  <rect x="40" y="80" width="120" height="40" rx="8" fill="#0B3AA6"/>
+</svg>

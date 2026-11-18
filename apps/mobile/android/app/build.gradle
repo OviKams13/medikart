@@ -95,7 +95,9 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.0"
+        // 4.25: single source of the app version = "version" of apps/mobile/package.json. The
+        // Update screen compares the same number (read by JavaScript) with `minimumVersion`.
+        versionName new groovy.json.JsonSlurper().parse(file("../../package.json")).version
     }
     signingConfigs {
         debug {

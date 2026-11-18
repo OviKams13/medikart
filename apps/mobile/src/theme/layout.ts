@@ -24,6 +24,8 @@ export const sizes = {
   chipHeight: 44,
   borderWidth: 1,
   loader: 32,
+  /** Width of the splash logo, in dp: the same value as the native splash (assets/bootsplash). */
+  splashLogo: 100,
   avatar: { sm: 32, md: 48, lg: 72, xl: 112 },
 } as const;
 

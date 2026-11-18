@@ -7,3 +7,4 @@ build/
 dist/
 coverage/
 packages/shared/src/api/generated/
+packages/shared/src/design/tokens.css

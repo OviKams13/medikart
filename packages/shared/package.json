@@ -2,20 +2,22 @@
   "name": "@medikart/shared",
   "version": "0.0.1",
   "private": true,
-  "description": "Code shared by the Medikart mobile app and web dashboard (datetime module, ESLint rules, generated API types).",
+  "description": "Code shared by the Medikart mobile app and web dashboard (datetime module, ESLint rules, generated API types, design tokens).",
   "type": "module",
   "main": "src/index.ts",
   "types": "src/index.ts",
   "exports": {
     ".": "./src/index.ts",
-    "./eslint": "./eslint/index.mjs"
+    "./eslint": "./eslint/index.mjs",
+    "./design/tokens.css": "./src/design/tokens.css"
   },
   "sideEffects": false,
   "scripts": {
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "generate:api": "node scripts/generate-api-types.mjs"
+    "generate:api": "node scripts/generate-api-types.mjs",
+    "generate:design": "node scripts/generate-design-css.mjs"
   },
   "dependencies": {
     "dayjs": "^1.11.23"
@@ -28,7 +30,7 @@
     "openapi-typescript": "7.13.0",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.72.2",
-    "vite": "8.3.5",
+    "vite": "8.3.8",
     "vitest": "^5.1.0"
   }
 }
