@@ -4,6 +4,7 @@ import type { SessionStatus } from '../store';
 /**
  * Typed routes (4.21). Navigation tree of report §7.1:
  *   Root: Splash | Auth | App (chosen by the session state only) | DevGallery (development builds)
+ *         Update replaces all of them while the installed version is below the minimum (4.25)
  *   Auth: Onboarding -> Login -> OTP -> Profile completion
  *   App:  Tabs (Home, Appointments, Settings, Profile) + Search, Doctors, Doctor profile,
  *         Booking 1, Booking 2, Appointment detail, Voice call, Notifications
@@ -37,6 +38,7 @@ export type AppStackParamList = {
 
 export type RootStackParamList = {
   Splash: undefined;
+  Update: undefined;
   Auth: NavigatorScreenParams<AuthStackParamList> | undefined;
   App: NavigatorScreenParams<AppStackParamList> | undefined;
   DevGallery: undefined;
