@@ -1,0 +1,85 @@
+# Minimal CI (4.28): lint, type check and tests for the backend, the shared package, the mobile app
+# and the web dashboard. No secrets, no deployment, no Android build (the Android SDK is not set up
+# here; the APK is built on a developer machine until a release pipeline exists at point 17).
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+# The token can only read the repository.
+permissions:
+  contents: read
+
+# A new push to the same branch cancels the run that is still going.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    name: Backend (Maven verify)
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      # `verify` = compile + tests + Spotless format check. The tests start MongoDB 8 with
+      # Testcontainers; Docker is already installed on GitHub's Ubuntu runners.
+      - name: Verify
+        working-directory: backend
+        run: ./mvnw --batch-mode --no-transfer-progress verify
+
+  format:
+    name: Format (Prettier)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      HUSKY: '0'
+    steps:
+      - uses: actions/checkout@v7
+      - run: corepack enable
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: yarn
+      - run: yarn install --immutable
+      - run: yarn prettier --check .
+
+  javascript:
+    name: ${{ matrix.workspace }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        workspace: ['@medikart/shared', '@medikart/mobile', '@medikart/web']
+    env:
+      # Git hooks are for developers: nothing to install in CI.
+      HUSKY: '0'
+    steps:
+      - uses: actions/checkout@v7
+      # Yarn 4 comes from the `packageManager` field through Corepack.
+      - run: corepack enable
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: yarn
+      - run: yarn install --immutable
+      - name: Lint
+        run: yarn workspace ${{ matrix.workspace }} lint
+      - name: Type check
+        run: yarn workspace ${{ matrix.workspace }} typecheck
+      - name: Tests
+        run: yarn workspace ${{ matrix.workspace }} test
+      # The dashboard also has to build: this is where the Tailwind theme and the font files
+      # are resolved.
+      - name: Build
+        if: matrix.workspace == '@medikart/web'
+        run: yarn workspace @medikart/web build
