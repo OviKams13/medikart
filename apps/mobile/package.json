@@ -7,7 +7,8 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "generate:splash": "react-native-bootsplash generate assets/brand/logo.svg --platforms=android --background=0B3AA6 --logo-width=100"
   },
   "dependencies": {
     "@medikart/shared": "workspace:*",
@@ -21,6 +22,7 @@
     "react": "19.3.0",
     "react-i18next": "18.0.1",
     "react-native": "0.88.1",
+    "react-native-bootsplash": "7.3.5",
     "react-native-localize": "3.7.2",
     "react-native-safe-area-context": "^5.5.2",
     "react-native-screens": "4.30.1",

@@ -36,6 +36,8 @@ async function renderApp(reply: FakeReply = REPLY) {
       </I18nextProvider>,
     );
   });
+  // The startup (version check, session restore) hands over from the splash to the first screen.
+  await act(async () => new Promise((resolve) => setTimeout(resolve, 20)));
   cleanup = async () => {
     await act(async () => tree.unmount());
     services.queryClient.clear();
@@ -68,8 +70,8 @@ afterEach(async () => {
 test('the app starts on the first screen of the auth stack, in French by default', async () => {
   const { tree, adapter } = await renderApp();
   expect(text(tree)).toContain(fr.screens.onboarding);
-  // No network call at startup before the update check (4.25) and login (point 5).
-  expect(adapter.calls).toHaveLength(0);
+  // The only call at startup is the version check (4.25); login comes with point 5.
+  expect(adapter.calls.map((call) => call.url)).toEqual(['/app-config']);
 });
 
 test('the dev menu opens the gallery, which shows a shared-package time and the translated errors', async () => {

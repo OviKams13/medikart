@@ -5,9 +5,10 @@ export type SessionStatus = 'restoring' | 'signedOut' | 'signedIn';
 
 export type SessionState = { status: SessionStatus };
 
-// Point 5 (login) starts at `restoring`, reads the Firebase session, then sets one of the other
-// two. Until then nobody is signed in. The Firebase session itself is kept by Firebase, not here.
-const initialState: SessionState = { status: 'signedOut' };
+// Every launch starts at `restoring` (the splash). `useStartup` (app/startup) leaves it once the
+// session is restored and the version checked; point 5 (login) supplies the real Firebase restore.
+// The Firebase session itself is kept by Firebase, not here.
+const initialState: SessionState = { status: 'restoring' };
 
 export const sessionSlice = createSlice({
   name: 'session',
